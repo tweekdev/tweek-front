@@ -15,10 +15,9 @@ const Auth = () => {
   const history = useHistory();
 
   const auth = useContext(AuthContext);
-  const [isLoginMode, setIsLoginMode] = useState(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  const [formState, inputHandler, setFormData] = useForm(
+  const [formState, inputHandler] = useForm(
     {
       email: {
         value: '',
@@ -32,50 +31,24 @@ const Auth = () => {
     false
   );
 
-  const switchModeHandler = () => {
-    if (!isLoginMode) {
-      setFormData(
-        {
-          ...formState.inputs,
-          name: undefined,
-        },
-        formState.inputs.email.isValid && formState.inputs.password.isValid
-      );
-    } else {
-      setFormData(
-        {
-          ...formState.inputs,
-          name: {
-            value: '',
-            isValid: false,
-          },
-        },
-        false
-      );
-    }
-    setIsLoginMode((prevMode) => !prevMode);
-  };
-
   const authSubmitHandler = async (event) => {
     event.preventDefault();
 
-    if (isLoginMode) {
-      try {
-        const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/users/login`,
-          'POST',
-          JSON.stringify({
-            email: formState.inputs.email.value,
-            password: formState.inputs.password.value,
-          }),
-          {
-            'Content-Type': 'application/json',
-          }
-        );
-        auth.login(responseData.userId, responseData.token);
-        history.push('/');
-      } catch (err) {}
-    }
+    try {
+      const responseData = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/users/login`,
+        'POST',
+        JSON.stringify({
+          email: formState.inputs.email.value,
+          password: formState.inputs.password.value,
+        }),
+        {
+          'Content-Type': 'application/json',
+        }
+      );
+      auth.login(responseData.userId, responseData.token);
+      history.push('/');
+    } catch (err) {}
   };
   return (
     <div className="main auth-page">
