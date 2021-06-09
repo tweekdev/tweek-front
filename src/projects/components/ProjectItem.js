@@ -24,9 +24,14 @@ const PlaceItem = (props) => {
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     try {
-      await sendRequest(`/api/tweekdev/projects/${props.id}`, 'DELETE', null, {
-        Authorization: 'Bearer ' + auth.token,
-      });
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/projects/${props.id}`,
+        'DELETE',
+        null,
+        {
+          Authorization: 'Bearer ' + auth.token,
+        }
+      );
       props.onDelete(props.id);
     } catch (err) {}
   };

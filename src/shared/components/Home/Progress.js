@@ -102,8 +102,7 @@ class Progress extends Component {
   }
 
   async componentDidMount() {
-    await axios
-      .get('http://localhost:5000/course')
+    await fetch('http://localhost:5000/course')
       .then((response) => {
         console.log(response);
         this.setState({ progress: response.data, isLoaded: true });

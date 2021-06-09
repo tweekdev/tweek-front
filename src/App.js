@@ -12,9 +12,7 @@ import { useAuth } from './shared/hooks/auth-hook';
 
 const Home = React.lazy(() => import('./shared/components/Home'));
 const About = React.lazy(() => import('./shared/components/Home/About'));
-const BackgroundLogo = React.lazy(() =>
-  import('./shared/components/BackgroundLogo')
-);
+
 const Contact = React.lazy(() => import('./shared/components/Home/Contact'));
 const NewProject = React.lazy(() => import('./projects/pages/NewProject'));
 const UpdateProject = React.lazy(() =>

@@ -56,9 +56,14 @@ const NewProject = () => {
       formData.append('lien', formState.inputs.lien.value);
       formData.append('repository', formState.inputs.repository.value);
       formData.append('image', formState.inputs.image.value);
-      await sendRequest(`/api/tweekdev/projects`, 'POST', formData, {
-        Authorization: 'Bearer ' + auth.token,
-      });
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/projects`,
+        'POST',
+        formData,
+        {
+          Authorization: 'Bearer ' + auth.token,
+        }
+      );
       history.push('/');
     } catch (err) {}
   };

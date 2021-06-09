@@ -10,7 +10,9 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const responseData = await sendRequest(`/api/tweekdev/users`);
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users`
+        );
         setLoadUsers(responseData.users);
       } catch (err) {}
     };

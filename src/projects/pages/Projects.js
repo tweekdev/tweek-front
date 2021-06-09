@@ -11,7 +11,9 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const responseData = await sendRequest(`/api/tweekdev/projects`);
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/projects`
+        );
         setLoadedProjects(responseData.projects);
       } catch (err) {}
     };
